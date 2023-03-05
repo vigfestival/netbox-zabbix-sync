@@ -48,6 +48,13 @@ Use the following custom fields in Netbox:
 * Default: null
 * Object: dcim > device_type
 ```
+```
+*Type: Text
+*Name: zabbix_vm_template
+*Required: False
+*Default: null
+*Content type: virtualization > virtual-machine
+```
 You can make the hostID field hidden or read-only to prevent human intervention.
 
 This is optional and there is a use case for leaving it read-write in the UI to manually change the ID. For example to re-run a sync.
