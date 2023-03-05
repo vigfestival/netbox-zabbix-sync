@@ -853,6 +853,14 @@ class NetworkVirtualmachine():
         INPUT: list of templates
         OUTPUT: True
         """
+        # If platform field in netbox contains windows/linux assign correct zabbix template.
+        if "windows" or "Windows" in self.nb.platform_name:
+            self.vm_template_name = "windows-vm"
+            self.nb.custom_fields[vm_template_cf] = "windows-vm"
+        elif "linux" or "Linux" in self.nb.platform_name:
+            self.vm_template_name = "linux-vm"
+            self.nb.custom_fields[vm_template_cf] = "linux-vm"
+
         if(not self.vm_template_name):
             e = (f"Device template '{self.nb.name}' "
                  "has no Zabbix template defined. setting icmp-ping")
