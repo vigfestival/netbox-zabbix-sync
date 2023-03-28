@@ -1,2 +1,6 @@
 *.log
 config.py
+.env
+test.py
+*.pyc
+*.pyo
