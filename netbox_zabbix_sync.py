@@ -751,9 +751,9 @@ class NetworkVirtualmachine():
         else:
             e = (f"Custom field {vm_template_cf} not "
                  f"found for {self.nb.name}"
-                 f" - defaulting to icmp-ping template.")
+                 f" - defaulting to ICMP Ping template.")
             logger.warning(e)
-            self.vm_template_name = "icmp-ping"
+            self.vm_template_name = "ICMP Ping"
 
         # Check if device has custom field
         if(device_cf in self.nb.custom_fields):
@@ -863,8 +863,8 @@ class NetworkVirtualmachine():
 
         if(not self.vm_template_name):
             e = (f"Device template '{self.nb.name}' "
-                 "has no Zabbix template defined. setting icmp-ping")
-            self.vm_template_name = "icmp-ping"
+                 "has no Zabbix template defined. setting ICMP Ping")
+            self.vm_template_name = "ICMP Ping"
             logger.info(e)
 
         for template in templates:
