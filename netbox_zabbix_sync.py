@@ -1230,7 +1230,7 @@ class ZabbixInterface():
                 snmp = self.context["zabbix"]["snmp"]
                 self.interface["details"] = {}
                 # Checks if bulk config has been defined
-                if(snmp.get("bulk")):
+                if("bulk" in snmp):
                     self.interface["details"]["bulk"] = str(snmp.pop("bulk"))
                 else:
                     # Fallback to bulk enabled if not specified
@@ -1241,15 +1241,15 @@ class ZabbixInterface():
                 else:
                     e = "SNMP version option is not defined."
                     raise InterfaceConfigError(e)
-                # If version 2 is used, get community string
-                if(self.interface["details"]["version"] == '2'):
+                # If version 1 or 2 is used, get community string
+                if(self.interface["details"]["version"] in ['1','2']):
                     if("community" in snmp):
+                        # Set SNMP community to confix context value
                         community = snmp["community"]
-                        self.interface["details"]["community"] = str(community)
                     else:
-                        e = ("No SNMP community string "
-                             "defined in custom context.")
-                        raise InterfaceConfigError(e)
+                        # Set SNMP community to default
+                        community = "{$SNMP_COMMUNITY}"
+                    self.interface["details"]["community"] = str(community)
                 # If version 3 has been used, get all
                 # SNMPv3 Netbox related configs
                 elif(self.interface["details"]["version"] == '3'):
@@ -1279,6 +1279,7 @@ class ZabbixInterface():
                                      "bulk": "1"}
 
 
+       
 if(__name__ == "__main__"):
     # Arguments parsing
     parser = argparse.ArgumentParser(
