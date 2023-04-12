@@ -198,8 +198,22 @@ To configure the interface parameters you'll need to use custom context. Custom 
 ```json
 {
     "zabbix": {
-        "interface_port": 1500,
+        "interface_port": 10050,
         "interface_type": 1
+    }
+}
+```
+##### SNMPv1 interface configuration example
+```json
+{
+    "zabbix": {
+        "interface_port": 161,
+        "interface_type": 2,
+        "snmp": {
+            "bulk": 1,
+            "community": "{$SNMP_COMMUNITY}",
+            "version": 1
+        }
     }
 }
 ```
@@ -211,7 +225,7 @@ To configure the interface parameters you'll need to use custom context. Custom 
         "interface_type": 2,
         "snmp": {
             "bulk": 1,
-            "community": "SecretCommunity",
+            "community": "{$SNMP_COMMUNITY}",
             "version": 2
         }
     }
